@@ -1,14 +1,24 @@
-## Sistema de Blog en Python
+# Sistema de Gestión de Blog
 
-## Descripción del proyecto
+## Descripción
 
-Este proyecto consiste en el desarrollo de un sistema de blog interactivo por consola, realizado en Python.
+Sistema de gestión de publicaciones desarrollado en Python, que permite administrar el contenido de un blog desde una interfaz interactiva por consola.
 
-El objetivo de esta entrega es aplicar los conceptos de Programación Orientada a Objetos (POO), organizando el código mediante clases y módulos, e incorporando persistencia de datos utilizando archivos JSON.
+La aplicación permite crear, consultar, buscar, filtrar y validar publicaciones, organizando la información mediante programación orientada a objetos. Además, incorpora persistencia de datos en archivos JSON, lo que permite conservar las publicaciones entre distintas ejecuciones del programa.
 
-El sistema permite administrar publicaciones, crear nuevos posts, realizar búsquedas, filtrar por etiquetas, validar información y guardar los datos para conservarlos entre ejecuciones.
+## Funcionalidades
 
-## Estructura del proyecto
+- **Gestión de publicaciones:** creación y administración de posts.
+- **Listado de publicaciones:** visualización de los posts registrados, incluyendo título, autor y estado.
+- **Búsqueda por título:** localización de publicaciones mediante palabras o fragmentos del título.
+- **Filtrado por etiquetas:** búsqueda de publicaciones según sus categorías o tags.
+- **Validación de contenido:** comprobación de los datos requeridos para garantizar la integridad de las publicaciones.
+- **Persistencia de datos:** almacenamiento y recuperación automática de publicaciones mediante archivos JSON.
+- **Manejo de errores:** control de situaciones como archivos inexistentes, vacíos, datos inválidos o entradas incorrectas.
+
+## Arquitectura del sistema
+
+El proyecto está organizado en módulos independientes para separar responsabilidades y facilitar el mantenimiento y la evolución del código.
 
 ```text
 PR-Entrega-6/
@@ -26,128 +36,69 @@ PR-Entrega-6/
     └── validaciones.py
 ```
 
-## Programación Orientada a Objetos
+### Modelos
 
-El proyecto utiliza tres clases principales:
+El sistema utiliza tres clases principales:
 
-### Clase Autor
+**Autor**
 
-Representa al autor de una publicación.
+Representa a los autores de las publicaciones. Contiene información como nombre, biografía, especialidad y redes sociales.
 
-Atributos:
-- `nombre`: nombre del autor.
-- `bio`: descripción del autor.
-- `especialidad`: área de especialización.
-- `redes_sociales`: redes sociales del autor.
+**Post**
 
-Incluye métodos para convertir sus atributos en un diccionario y reconstruir un objeto a partir de un diccionario.
+Representa cada publicación del blog. Incluye identificador, título, contenido, autor, etiquetas y estado. Cada publicación mantiene una relación con una instancia de la clase `Autor`.
 
-### Clase Post
+**Blog**
 
-Representa una publicación del blog.
+Centraliza la administración de las publicaciones y las operaciones disponibles sobre ellas, como búsquedas, filtros, creación y validación de posts.
 
-Atributos:
-- `id`: identificador único de la publicación.
-- `titulo`: título del post.
-- `contenido`: contenido de la publicación.
-- `autor`: objeto de la clase Autor.
-- `tags`: lista de etiquetas.
-- `estado`: estado de la publicación.
+### Persistencia de datos
 
-Los estados disponibles son:
-- `borrador`
-- `publicado`
-- `archivado`
+La información se almacena en `posts.json`, utilizando el formato JSON para facilitar su lectura, escritura y recuperación.
 
-Incluye métodos para convertir el objeto en un diccionario y reconstruirlo a partir de los datos almacenados.
+El sistema contempla dos procesos principales:
 
-### Clase Blog
+- **Carga de información:** al iniciar la aplicación, recupera las publicaciones almacenadas y reconstruye los objetos correspondientes.
+- **Guardado de información:** convierte los objetos del sistema a estructuras compatibles con JSON y almacena los cambios realizados.
 
-Administra las publicaciones del sistema.
+## Estados de las publicaciones
 
-Se encarga de centralizar las operaciones sobre los posts, permitiendo:
-- Listar publicaciones.
-- Buscar publicaciones por título.
-- Filtrar publicaciones por etiqueta.
-- Crear nuevos posts.
-- Validar publicaciones.
-- Obtener y administrar la lista de publicaciones.
+Cada publicación puede encontrarse en uno de los siguientes estados:
 
-## Persistencia de datos con JSON
-
-El sistema utiliza el archivo `posts.json` para almacenar las publicaciones.
-
-Se implementan funciones para:
-
-- **Cargar datos:** recuperar las publicaciones almacenadas al iniciar el programa.
-- **Guardar datos:** convertir los objetos en diccionarios y almacenarlos en formato JSON.
-- **Reconstruir objetos:** transformar los datos recuperados del archivo en instancias de las clases correspondientes.
-
-También se contempla el manejo de errores ante situaciones como:
-- Archivo inexistente.
-- Archivo vacío.
-- Contenido JSON inválido.
-- Datos incompletos o incorrectos.
-
-## Funcionalidades
-
-El sistema cuenta con un menú interactivo por consola que permite realizar las siguientes operaciones:
-
-1. Listar todas las publicaciones.
-2. Buscar publicaciones por título.
-3. Filtrar publicaciones por etiqueta.
-4. Crear una nueva publicación.
-5. Validar publicaciones.
-6. Guardar los datos en formato JSON.
-7. Salir del programa.
-
-Las búsquedas por título y los filtros por etiquetas no distinguen entre mayúsculas y minúsculas.
-
-Durante la creación de publicaciones, el sistema solicita los datos necesarios y valida que la información ingresada sea correcta.
+| Estado | Descripción |
+|---|---|
+| `borrador` | Publicación en preparación. |
+| `publicado` | Publicación disponible. |
+| `archivado` | Publicación que ya no se encuentra activa. |
 
 ## Tecnologías utilizadas
 
-- **Python 3:** lenguaje de programación.
-- **JSON:** formato para almacenar y recuperar información.
-- **POO:** utilización de clases, objetos, atributos y métodos.
-- **Git y GitHub:** control de versiones y almacenamiento del proyecto.
+- Python 3
+- Programación Orientada a Objetos (POO)
+- JSON
+- Git
+- GitHub
 
 ## Instalación y ejecución
 
-### 1. Clonar el repositorio
+### Clonar el repositorio
 
 ```bash
 git clone https://github.com/agusmachado7474-beep/PR-Entrega-6.git
 ```
 
-### 2. Ingresar a la carpeta del proyecto
+### Acceder al directorio
 
 ```bash
 cd PR-Entrega-6
 ```
 
-### 3. Ejecutar el programa
+### Ejecutar la aplicación
 
 ```bash
 python main.py
 ```
 
-## Objetivos de aprendizaje
-
-Con esta entrega se busca aplicar y reforzar los siguientes conceptos:
-
-- Creación y utilización de clases y objetos en Python.
-- Uso de constructores mediante `__init__`.
-- Implementación de métodos y atributos.
-- Relación entre objetos de distintas clases.
-- Modularización del código mediante paquetes e importaciones.
-- Conversión de objetos a diccionarios y viceversa.
-- Lectura y escritura de archivos JSON.
-- Manejo de excepciones.
-- Organización y mantenimiento de proyectos de software.
-
 ## Autor
 
 **Agustín Machado**
-
-Proyecto desarrollado como parte de las actividades de aprendizaje de Python.
