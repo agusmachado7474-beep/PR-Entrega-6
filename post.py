@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "titulo": "Primeros pasos con Python",
+    "contenido": "Introducción al lenguaje Python.",
+    "autor": {
+      "nombre": "Agustín Machado",
+      "bio": "Desarrollador web",
+      "especialidad": "Python"
+    },
+    "tags": ["Python", "Principiantes"],
+    "estado": "publicado"
+  }
+]
