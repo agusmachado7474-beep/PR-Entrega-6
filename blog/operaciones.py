@@ -38,15 +38,15 @@ if __name__ == "__main__":
             else:
                 print("No se encontraron publicaciones con ese tag.")
 
-        elif opcion == 4:
+          elif opcion == 4:
             print("\n===== RESULTADO DE VALIDACIÓN =====")
-             valido, mensaje = validar_post(post)
 
-                 if valido:
-                     print("Post ID:", post.get("id"), "- POST VÁLIDO")
-                      for post in posts:
-                       valido, mensaje = validar_post(post)
-                  else:
+            for post in posts:
+                valido, mensaje = validar_post(post)
+
+                if valido:
+                    print("Post ID:", post.get("id"), "- POST VÁLIDO")
+                else:
                     print("Post ID:", post.get("id"), "- POST INVÁLIDO:", mensaje)
 
         elif opcion == 5:
