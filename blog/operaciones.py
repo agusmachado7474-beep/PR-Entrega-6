@@ -40,13 +40,13 @@ if __name__ == "__main__":
 
         elif opcion == 4:
             print("\n===== RESULTADO DE VALIDACIÓN =====")
+             valido, mensaje = validar_post(post)
 
-            for post in posts:
-                valido, mensaje = validar_post(post)
-
-                if valido:
-                    print("Post ID:", post.get("id"), "- POST VÁLIDO")
-                else:
+                 if valido:
+                     print("Post ID:", post.get("id"), "- POST VÁLIDO")
+                      for post in posts:
+                       valido, mensaje = validar_post(post)
+                  else:
                     print("Post ID:", post.get("id"), "- POST INVÁLIDO:", mensaje)
 
         elif opcion == 5:
