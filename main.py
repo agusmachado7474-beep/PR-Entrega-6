@@ -1,4 +1,3 @@
-
 from blog.menu import mostrar_menu
 from blog.operaciones import (
     cargar_posts,
