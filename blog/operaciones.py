@@ -1,75 +1,57 @@
 
-import json
+from blog.menu import mostrar_menu
+from blog.operaciones import (
+    cargar_posts,
+    listar_posts,
+    buscar_por_titulo,
+    filtrar_por_tag
+)
+from blog.validaciones import validar_post
+if __name__ == "__main__":
 
+    posts = cargar_posts()
 
-def cargar_posts():
-    try:
-        with open("posts.json", "r", encoding="utf-8") as archivo:
-            posts = json.load(archivo)
+    while True:
+        opcion = mostrar_menu()
 
-            if not isinstance(posts, list):
-                print("El archivo no contiene una lista de publicaciones.")
-                return []
+        if opcion is None:
+            continue
 
-            return posts
+        elif opcion == 1:
+            listar_posts(posts)
 
-    except FileNotFoundError:
-        print("No se encontró el archivo posts.json.")
-        return []
+        elif opcion == 2:
+            termino = input("Ingrese el título que desea buscar: ")
+            resultados = buscar_por_titulo(posts, termino)
 
-    except json.JSONDecodeError:
-        print("El archivo JSON está vacío o contiene datos inválidos.")
-        return []
+            if resultados:
+                listar_posts(resultados)
+            else:
+                print("No se encontraron publicaciones.")
 
+        elif opcion == 3:
+            tag = input("Ingrese el tag que desea buscar: ")
+            resultados = filtrar_por_tag(posts, tag)
 
-def guardar_posts(posts):
-    try:
-        with open("posts.json", "w", encoding="utf-8") as archivo:
-            json.dump(posts, archivo, ensure_ascii=False, indent=4)
+            if resultados:
+                listar_posts(resultados)
+            else:
+                print("No se encontraron publicaciones con ese tag.")
 
-        print("Publicaciones guardadas correctamente.")
+        elif opcion == 4:
+            print("\n===== RESULTADO DE VALIDACIÓN =====")
 
-    except (TypeError, OSError):
-        print("No se pudieron guardar las publicaciones.")
+            for post in posts:
+                valido, mensaje = validar_post(post)
 
+                if valido:
+                    print("Post ID:", post.get("id"), "- POST VÁLIDO")
+                else:
+                    print("Post ID:", post.get("id"), "- POST INVÁLIDO:", mensaje)
 
-def listar_posts(lista):
-    if not lista:
-        print("No hay publicaciones para mostrar.")
-        return
+        elif opcion == 5:
+            print("Gracias por utilizar el sistema de blog.")
+            break
 
-    for post in lista:
-        print("----------------------")
-        print("ID:", post.get("id"))
-        print("Título:", post.get("titulo"))
-        print("Autor:", post.get("autor", {}).get("nombre"))
-        print("Estado:", post.get("estado"))
-        print("Tags:", post.get("tags"))
-
-
-def buscar_por_titulo(lista, termino):
-    resultados = []
-
-    for post in lista:
-        titulo = post.get("titulo", "")
-
-        if termino.lower() in titulo.lower():
-            resultados.append(post)
-
-    return resultados
-
-
-def filtrar_por_tag(lista, tag):
-    resultados = []
-
-    for post in lista:
-        for etiqueta in post.get("tags", []):
-            if etiqueta.lower() == tag.lower():
-                resultados.append(post)
-                break
-
-    return resultados
-
-                break
-
-    return resultados
+        else:
+            print("Opción incorrecta. Elegí un número del 1 al 5.")
