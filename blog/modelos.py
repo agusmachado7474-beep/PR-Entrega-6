@@ -1,3 +1,4 @@
+from .datos import estados_post
 class Autor:
     def __init__(self, nombre, bio, especialidad="", redes_sociales=None):
         self.nombre = nombre
@@ -83,7 +84,19 @@ class Blog:
             if tag.lower() in [t.lower() for t in post.tags]:
                 resultados.append(post)
 
-        return resultados
+  def validar_post(self, post):
+    return (
+        isinstance(post, Post)
+        and isinstance(post.autor, Autor)
+        and isinstance(post.titulo, str)
+        and bool(post.titulo.strip())
+        and isinstance(post.contenido, str)
+        and bool(post.contenido.strip())
+        and isinstance(post.tags, list)
+        and len(post.tags) > 0
+        and all(isinstance(tag, str) and tag.strip() for tag in post.tags)
+        and post.estado in estados_post
+    )      return resultados
 
     def crear_post(self, post):
         if self.validar_post(post):
@@ -92,16 +105,7 @@ class Blog:
 
         return False
 
-    def validar_post(self, post):
-        return (
-            isinstance(post, Post)
-            and isinstance(post.autor, Autor)
-            and bool(post.titulo.strip())
-            and bool(post.contenido.strip())
-            and isinstance(post.tags, list)
-            and len(post.tags) > 0
-            and post.estado in ("borrador", "publicado", "archivado")
-        )
+  
 
     def obtener_posts(self):
         return self.posts
