@@ -1,17 +1,45 @@
-# Muestra el menú principal y devuelve una opción
-def mostrar_menu():
-
-    print("\n===== MENÚ DEL BLOG =====")
-    print("1. Ver todos los posts")
-    print("2. Buscar por título")
-    print("3. Filtrar por tag")
-    print("4. Validar posts")
-    print("5. Salir")
-
-    try:
-        opcion = int(input("Introducí el número de la opción: "))
-        return opcion
-
-    except ValueError:
-        print("Error: tenés que ingresar un número.")
-        return None
+# Datos del autor del blog
+perfil_autor = {
+    "nombre": "Agustín Machado",
+    "bio": "Desarrollador web",
+    "especialidad": "Python y Java",
+    "redes_sociales": ["@Amachado", "@AgusPython"]
+}
+# Estados permitidos para las publicaciones
+estados_post = ("borrador", "publicado", "archivado")
+# Tags disponibles en el blog
+etiquetas_blog = {
+    "Python", "Django", "Web", "Backend",
+    "Principiantes", "Inteligencia Artificial", "Finanzas"
+}
+# Lista de publicaciones del blog
+posts = [
+    {
+        "id": 100,
+        "titulo": "Primeros pasos con Python",
+        "autor": perfil_autor,
+        "tags": ["Python", "Principiantes"],
+        "estado": "publicado"
+    },
+    {
+        "id": 101,
+        "titulo": "El futuro de la Inteligencia Artificial",
+        "autor": perfil_autor,
+        "tags": ["Inteligencia Artificial", "Principiantes"],
+        "estado": "borrador"
+    },
+    {
+        "id": 103,
+        "titulo": "Python para analistas financieros",
+        "autor": perfil_autor,
+        "tags": ["Python", "Principiantes", "Finanzas"],
+        "estado": "publicado"
+    },
+    {
+        "id": 104,
+        "titulo": "",
+        "autor": perfil_autor,
+        "tags": ["Python"],
+        "estado": "publicado"
+    }
+]
