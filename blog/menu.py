@@ -7,8 +7,8 @@ def mostrar_menu():
     print("3. Filtrar por tag")
     print("4. Crear nuevo posts")
     print("5. Validar posts ") 
-    print( "6. Guardar posts en JSON")  
-    print( "7. Salir")
+    print("6. Guardar posts en JSON")  
+    print("7. Salir")
 
     try:
         opcion = int(input("Introducí el número de la opción: "))
