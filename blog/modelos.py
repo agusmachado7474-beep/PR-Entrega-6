@@ -84,7 +84,7 @@ class Blog:
             if tag.lower() in [t.lower() for t in post.tags]:
                 resultados.append(post)
 
-  def validar_post(self, post):
+ def validar_post(self, post):
     return (
         isinstance(post, Post)
         and isinstance(post.autor, Autor)
@@ -96,8 +96,6 @@ class Blog:
         and len(post.tags) > 0
         and all(isinstance(tag, str) and tag.strip() for tag in post.tags)
         and post.estado in estados_post
-    )      return resultados
-
     def crear_post(self, post):
         if self.validar_post(post):
             self.posts.append(post)
