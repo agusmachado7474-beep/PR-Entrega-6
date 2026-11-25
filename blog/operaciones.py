@@ -42,7 +42,7 @@ if __name__ == "__main__":
             print("\n===== RESULTADO DE VALIDACIÓN =====")
 
               for post in posts:
-                valido, mensaje = validar_post(post)
+                        valido, mensaje = validar_post(post)
 
                  if valido:
                    print("Post ID:", post.get("id"), "- POST VÁLIDO")
