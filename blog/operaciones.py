@@ -41,13 +41,13 @@ if __name__ == "__main__":
         elif opcion == 4:
             print("\n===== RESULTADO DE VALIDACIÓN =====")
 
-            for post in posts:
+              for post in posts:
                 valido, mensaje = validar_post(post)
 
-            if valido:
-                print("Post ID:", post.get("id"), "- POST VÁLIDO")
-            else:
-                print("Post ID:", post.get("id"), "- POST INVÁLIDO:", mensaje)
+                 if valido:
+                   print("Post ID:", post.get("id"), "- POST VÁLIDO")
+                 else:
+                   print("Post ID:", post.get("id"), "- POST INVÁLIDO:", mensaje)
 
         elif opcion == 5:
             print("Gracias por utilizar el sistema de blog.")
